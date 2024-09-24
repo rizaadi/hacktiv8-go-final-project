@@ -48,23 +48,25 @@ Swagger digunakan untuk mendokumentasikan dan menguji API. Untuk mengakses dokum
 
 1. **Inisialisasi Swagger:**
 
-Jalankan perintah berikut dari root directory project untuk menginisialisasi Swagger:
+   Jalankan perintah berikut dari root directory project untuk menginisialisasi Swagger:
 
-```sh
-swag init -g ./internal/infrastructure/http/ginHandler.go
-```
+   ```sh
+   swag init -g ./internal/infrastructure/http/ginHandler.go
+   ```
 
 2. **Akses Swagger UI:**
+   
+   Buka browser Anda dan akses Swagger UI melalui URL berikut:
 
-Buka browser Anda dan akses Swagger UI melalui URL berikut:
-
-```sh
-http://localhost:8080/swagger/index.html
-```
+   ```sh
+   http://localhost:8080/swagger/index.html
+   ```
 
 ## Struktur Folder
 
 Project ini menggunakan struktur folder yang mengikuti prinsip Domain-Driven Design (DDD). Berikut adalah penjelasan dari struktur folder:
+
+```
 .
 ├── .env
 ├── cmd
@@ -123,6 +125,7 @@ Project ini menggunakan struktur folder yang mengikuti prinsip Domain-Driven Des
 │   └── userDTO
 │       └── dto.go
 └── README.md
+```
 
 ### Penjelasan Struktur Folder
 
