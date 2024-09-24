@@ -1,0 +1,561 @@
+definitions:
+  commentDTO.Comment:
+    properties:
+      message:
+        example: This is my comment
+        type: string
+      photo_id:
+        example: 1
+        type: integer
+    type: object
+  commentDTO.CommentResponse:
+    properties:
+      created_at:
+        example: "2021-07-12T09:00:00Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      message:
+        example: This is my comment
+        type: string
+      photo_id:
+        example: 1
+        type: integer
+      updated_at:
+        example: "2021-07-12T09:00:00Z"
+        type: string
+    type: object
+  photoDTO.Photo:
+    properties:
+      caption:
+        example: This is my photo
+        type: string
+      photo_url:
+        example: https://www.google.com/image.jpg
+        type: string
+      title:
+        example: My Photo
+        type: string
+    type: object
+  photoDTO.PhotoResponse:
+    properties:
+      caption:
+        example: This is my photo
+        type: string
+      created_at:
+        example: "2021-07-12T09:00:00Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      photo_url:
+        example: https://www.google.com/image.jpg
+        type: string
+      title:
+        example: My Photo
+        type: string
+      updated_at:
+        example: "2021-07-12T09:00:00Z"
+        type: string
+    type: object
+  photoDTO.UpdatePhoto:
+    properties:
+      caption:
+        example: This is my photo
+        type: string
+      photo_url:
+        example: https://www.google.com/image.jpg
+        type: string
+      title:
+        example: My Photo
+        type: string
+    type: object
+  socialmediaDTO.SocialMedia:
+    properties:
+      name:
+        example: Facebook
+        type: string
+      social_media_url:
+        example: https://www.facebook.com
+        type: string
+    type: object
+  socialmediaDTO.SocialMediaResponse:
+    properties:
+      created_at:
+        example: "2021-08-01T00:00:00Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Facebook
+        type: string
+      social_media_url:
+        example: https://www.facebook.com
+        type: string
+      updated_at:
+        example: "2021-08-01T00:00:00Z"
+        type: string
+    type: object
+  socialmediaDTO.UpdateSocialMedia:
+    properties:
+      name:
+        example: Facebook
+        type: string
+      social_media_url:
+        example: https://www.facebook.com
+        type: string
+    type: object
+  userDTO.LoginUserRequest:
+    properties:
+      email:
+        example: riza@gmail.com
+        type: string
+      password:
+        example: rza123
+        type: string
+    type: object
+  userDTO.LoginUserResponse:
+    properties:
+      age:
+        example: 18
+        type: integer
+      email:
+        example: riza@gmail.com
+        type: string
+      token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjYwNzQwNzcsImlkIjoxLCJlbWFpbCI6InJpemFAZ21haWwuY29tIn0.7
+        type: string
+      user_name:
+        example: riza
+        type: string
+    type: object
+  userDTO.User:
+    properties:
+      age:
+        example: 18
+        type: integer
+      email:
+        example: riza@gmail.com
+        type: string
+      password:
+        example: rza123
+        type: string
+      user_name:
+        example: riza
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: Riza
+    url: http://www.rizaadikurniawan.com
+  description: This is a simple MyGram API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: MyGram API
+  version: "1.0"
+paths:
+  /comment:
+    get:
+      consumes:
+      - application/json
+      description: Get all comments
+      parameters:
+      - description: Photo ID
+        in: query
+        name: photo_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/commentDTO.CommentResponse'
+            type: array
+      security:
+      - Bearer: []
+      summary: Get all comments
+      tags:
+      - comment
+    post:
+      consumes:
+      - application/json
+      description: Create a comment
+      parameters:
+      - description: Create Comment
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/commentDTO.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commentDTO.Comment'
+      security:
+      - Bearer: []
+      summary: Create a comment
+      tags:
+      - comment
+  /comment/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a comment
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Delete a comment
+      tags:
+      - comment
+    get:
+      consumes:
+      - application/json
+      description: Get a comment by ID
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commentDTO.CommentResponse'
+      security:
+      - Bearer: []
+      summary: Get a comment by ID
+      tags:
+      - comment
+    put:
+      consumes:
+      - application/json
+      description: Update a comment
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Comment
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/commentDTO.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commentDTO.CommentResponse'
+      security:
+      - Bearer: []
+      summary: Update a comment
+      tags:
+      - comment
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate a user and return a JWT token
+      parameters:
+      - description: Login User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/userDTO.LoginUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userDTO.LoginUserResponse'
+      summary: Login a user
+      tags:
+      - users
+  /photo:
+    get:
+      consumes:
+      - application/json
+      description: Get all photos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/photoDTO.PhotoResponse'
+            type: array
+      security:
+      - Bearer: []
+      summary: Get all photos
+      tags:
+      - photo
+    post:
+      consumes:
+      - application/json
+      description: Create a photo
+      parameters:
+      - description: Create Photo
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/photoDTO.Photo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/photoDTO.Photo'
+      security:
+      - Bearer: []
+      summary: Create a photo
+      tags:
+      - photo
+  /photo/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a photo
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Delete a photo
+      tags:
+      - photo
+    get:
+      consumes:
+      - application/json
+      description: Get a photo by ID
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/photoDTO.PhotoResponse'
+      security:
+      - Bearer: []
+      summary: Get a photo by ID
+      tags:
+      - photo
+    put:
+      consumes:
+      - application/json
+      description: Update a photo
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Photo
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/photoDTO.UpdatePhoto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/photoDTO.PhotoResponse'
+      security:
+      - Bearer: []
+      summary: Update a photo
+      tags:
+      - photo
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user
+      parameters:
+      - description: Create User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/userDTO.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userDTO.User'
+      summary: Create a user
+      tags:
+      - users
+  /social_media:
+    get:
+      consumes:
+      - application/json
+      description: Get all social media
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/socialmediaDTO.SocialMediaResponse'
+            type: array
+      security:
+      - Bearer: []
+      summary: Get all social media
+      tags:
+      - social media
+    post:
+      consumes:
+      - application/json
+      description: Create a social media
+      parameters:
+      - description: Create Social Media
+        in: body
+        name: social_media
+        required: true
+        schema:
+          $ref: '#/definitions/socialmediaDTO.SocialMedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/socialmediaDTO.SocialMedia'
+      security:
+      - Bearer: []
+      summary: Create a social media
+      tags:
+      - social media
+  /social_media/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a social media
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Delete a social media
+      tags:
+      - social media
+    get:
+      consumes:
+      - application/json
+      description: Get a social media by ID
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/socialmediaDTO.SocialMediaResponse'
+      security:
+      - Bearer: []
+      summary: Get a social media by ID
+      tags:
+      - social media
+    put:
+      consumes:
+      - application/json
+      description: Update a social media
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Social Media
+        in: body
+        name: social_media
+        required: true
+        schema:
+          $ref: '#/definitions/socialmediaDTO.UpdateSocialMedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/socialmediaDTO.SocialMediaResponse'
+      security:
+      - Bearer: []
+      summary: Update a social media
+      tags:
+      - social media
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
